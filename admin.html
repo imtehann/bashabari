@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — BashaBari</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader" class="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">বাসা<span>বাড়ি</span></div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">বাসা<span>বাড়ি</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="listings.html">Listings</a>
+      <a href="admin.html" class="active">Admin</a>
+    </div>
+    <div class="nav-actions">
+      <a href="listings.html" class="btn-nav">Browse All</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="listings.html">Listings</a>
+    <a href="admin.html">Admin</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header admin-header">
+  <div class="container">
+    <div class="admin-header-inner">
+      <div>
+        <h1>Admin Dashboard</h1>
+        <p>Manage and add rental listings</p>
+      </div>
+      <div class="admin-stats-bar">
+        <div class="admin-stat">
+          <strong id="totalCount">0</strong>
+          <span>Total</span>
+        </div>
+        <div class="admin-stat">
+          <strong id="verifiedCount">0</strong>
+          <span>Verified</span>
+        </div>
+        <div class="admin-stat">
+          <strong id="userCount">0</strong>
+          <span>User Added</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN MAIN -->
+<div class="admin-layout container">
+
+  <!-- ADD LISTING FORM -->
+  <div class="admin-form-wrap">
+    <div class="admin-form-card">
+      <h2 class="form-title">➕ Add New Listing</h2>
+      <p class="form-subtitle">Fill in the details below. Listing will be saved locally.</p>
+
+      <div class="form-grid">
+        <div class="form-group full">
+          <label for="f-title">Listing Title *</label>
+          <input type="text" id="f-title" placeholder="e.g. Spacious 3 Bedroom Flat in Mirpur" />
+        </div>
+        <div class="form-group">
+          <label for="f-location">Location *</label>
+          <select id="f-location">
+            <option value="">Select Area</option>
+            <option>Mirpur</option>
+            <option>Uttara</option>
+            <option>Dhanmondi</option>
+            <option>Mohammadpur</option>
+            <option>Gulshan</option>
+            <option>Banani</option>
+            <option>Bashundhara</option>
+            <option>Rampura</option>
+            <option>Khilgaon</option>
+            <option>Malibagh</option>
+            <option>Badda</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-sublocation">Sub-area / Road</label>
+          <input type="text" id="f-sublocation" placeholder="e.g. Section 6, Road 12" />
+        </div>
+        <div class="form-group">
+          <label for="f-rent">Monthly Rent (BDT) *</label>
+          <input type="number" id="f-rent" placeholder="e.g. 12000" min="1000" />
+        </div>
+        <div class="form-group">
+          <label for="f-type">Room Type *</label>
+          <select id="f-type">
+            <option value="">Select Type</option>
+            <option>Bachelor</option>
+            <option>Family</option>
+            <option>Sublet</option>
+            <option>Office</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-beds">Bedrooms</label>
+          <select id="f-beds">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-baths">Bathrooms</label>
+          <select id="f-baths">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="f-desc">Description *</label>
+          <textarea id="f-desc" rows="3" placeholder="Describe the flat — floor, amenities, nearby landmarks, etc."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="f-contact">Contact Name *</label>
+          <input type="text" id="f-contact" placeholder="e.g. Mr. Karim" />
+        </div>
+        <div class="form-group">
+          <label for="f-phone">Phone Number *</label>
+          <input type="text" id="f-phone" placeholder="e.g. +880 1712-345678" />
+        </div>
+        <div class="form-group">
+          <label for="f-emoji">Icon (emoji)</label>
+          <select id="f-emoji">
+            <option>🏠</option>
+            <option>🏢</option>
+            <option>🛋</option>
+            <option>🏘</option>
+            <option>🏡</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Verified?</label>
+          <div class="toggle-wrap">
+            <label class="toggle">
+              <input type="checkbox" id="f-verified">
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label" id="toggleLabel">Not Verified</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-submit" onclick="submitListing()">Add Listing →</button>
+        <button class="btn-reset" onclick="resetForm()">Reset</button>
+      </div>
+
+      <div class="form-toast" id="formToast"></div>
+    </div>
+  </div>
+
+  <!-- MANAGE LISTINGS -->
+  <div class="admin-manage">
+    <div class="admin-manage-header">
+      <h2>📋 Manage Listings</h2>
+      <input type="text" id="adminSearch" placeholder="Search listings..." oninput="renderAdminList()" />
+    </div>
+    <div id="adminList" class="admin-list"></div>
+    <div class="admin-note">
+      <p>⚠️ Default sample listings cannot be deleted. Only user-added listings can be removed.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2025 BashaBari. Built for Bangladesh 🇧🇩</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Toggle label
+  document.getElementById('f-verified').addEventListener('change', function() {
+    document.getElementById('toggleLabel').textContent = this.checked ? 'Verified ✓' : 'Not Verified';
+  });
+
+  function submitListing() {
+    const title = document.getElementById('f-title').value.trim();
+    const location = document.getElementById('f-location').value;
+    const sublocation = document.getElementById('f-sublocation').value.trim();
+    const rent = parseInt(document.getElementById('f-rent').value);
+    const type = document.getElementById('f-type').value;
+    const beds = document.getElementById('f-beds').value;
+    const baths = document.getElementById('f-baths').value;
+    const desc = document.getElementById('f-desc').value.trim();
+    const contact = document.getElementById('f-contact').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const emoji = document.getElementById('f-emoji').value;
+    const verified = document.getElementById('f-verified').checked;
+
+    if (!title || !location || !rent || !type || !desc || !contact || !phone) {
+      showToast('⚠️ Please fill all required fields.', 'error');
+      return;
+    }
+
+    const newListing = {
+      id: Date.now(),
+      title,
+      location: sublocation ? `${location}, ${sublocation}` : location,
+      rent,
+      type,
+      beds,
+      baths,
+      description: desc,
+      contact,
+      phone,
+      emoji,
+      verified,
+      userAdded: true
+    };
+
+    addUserListing(newListing);
+    showToast('✅ Listing added successfully!', 'success');
+    resetForm();
+    renderAdminList();
+    updateAdminStats();
+  }
+
+  function resetForm() {
+    ['f-title','f-sublocation','f-rent','f-desc','f-contact','f-phone'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('f-location').value = '';
+    document.getElementById('f-type').value = '';
+    document.getElementById('f-verified').checked = false;
+    document.getElementById('toggleLabel').textContent = 'Not Verified';
+  }
+
+  function showToast(msg, type) {
+    const toast = document.getElementById('formToast');
+    toast.textContent = msg;
+    toast.className = `form-toast show ${type}`;
+    setTimeout(() => toast.className = 'form-toast', 3000);
+  }
+
+  function renderAdminList() {
+    const all = getAllListings();
+    const query = document.getElementById('adminSearch').value.toLowerCase();
+    const filtered = query ? all.filter(l =>
+      l.title.toLowerCase().includes(query) ||
+      l.location.toLowerCase().includes(query)
+    ) : all;
+
+    const list = document.getElementById('adminList');
+    list.innerHTML = filtered.map(l => `
+      <div class="admin-row ${l.userAdded ? 'user-row' : ''}">
+        <div class="admin-row-icon">${l.emoji}</div>
+        <div class="admin-row-info">
+          <strong>${l.title}</strong>
+          <span>${l.location} · ${l.type} · ৳${l.rent.toLocaleString('en-BD')}/mo</span>
+        </div>
+        <div class="admin-row-badges">
+          ${l.verified ? '<span class="badge-v">✓ Verified</span>' : '<span class="badge-u">Pending</span>'}
+          ${l.userAdded ? '<span class="badge-new">New</span>' : ''}
+        </div>
+        <div class="admin-row-actions">
+          ${l.userAdded ? `<button class="btn-delete" onclick="deleteListing(${l.id})">Delete</button>` : '<span class="btn-sample">Sample</span>'}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function deleteListing(id) {
+    if (confirm('Delete this listing?')) {
+      removeUserListing(id);
+      renderAdminList();
+      updateAdminStats();
+    }
+  }
+
+  function updateAdminStats() {
+    const all = getAllListings();
+    document.getElementById('totalCount').textContent = all.length;
+    document.getElementById('verifiedCount').textContent = all.filter(l => l.verified).length;
+    document.getElementById('userCount').textContent = all.filter(l => l.userAdded).length;
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    renderAdminList();
+    updateAdminStats();
+  });
+</script>
+</body>
+</html>

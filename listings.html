@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Listings — BashaBari</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader" class="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">বাসা<span>বাড়ি</span></div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">বাসা<span>বাড়ি</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="listings.html" class="active">Listings</a>
+      <a href="admin.html">Admin</a>
+    </div>
+    <div class="nav-actions">
+      <a href="admin.html" class="btn-nav">+ Add Listing</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="listings.html">Listings</a>
+    <a href="admin.html">Admin</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container">
+    <h1>All Listings</h1>
+    <p>Direct from landlords — no broker fees</p>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar sticky-filter" id="filterBar">
+  <div class="container filter-container">
+    <div class="filter-group">
+      <label>📍 Location</label>
+      <select id="filterLocation" onchange="applyFilters()">
+        <option value="">All Areas</option>
+        <option>Mirpur</option>
+        <option>Uttara</option>
+        <option>Dhanmondi</option>
+        <option>Mohammadpur</option>
+        <option>Gulshan</option>
+        <option>Banani</option>
+        <option>Bashundhara</option>
+        <option>Rampura</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>💰 Max Rent</label>
+      <select id="filterBudget" onchange="applyFilters()">
+        <option value="">Any</option>
+        <option value="10000">৳10,000</option>
+        <option value="15000">৳15,000</option>
+        <option value="20000">৳20,000</option>
+        <option value="30000">৳30,000</option>
+        <option value="50000">৳50,000</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>🛏 Type</label>
+      <select id="filterType" onchange="applyFilters()">
+        <option value="">All Types</option>
+        <option>Bachelor</option>
+        <option>Family</option>
+        <option>Sublet</option>
+        <option>Office</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>✅ Status</label>
+      <select id="filterVerified" onchange="applyFilters()">
+        <option value="">All</option>
+        <option value="true">Verified Only</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>↕ Sort</label>
+      <select id="filterSort" onchange="applyFilters()">
+        <option value="default">Default</option>
+        <option value="low">Price: Low→High</option>
+        <option value="high">Price: High→Low</option>
+      </select>
+    </div>
+    <button class="btn-clear" onclick="clearFilters()">Clear</button>
+  </div>
+</div>
+
+<!-- RESULTS INFO -->
+<div class="container">
+  <div class="results-info">
+    <span id="resultsCount"></span>
+    <div class="view-toggle">
+      <button class="view-btn active" id="gridBtn" onclick="setView('grid')" title="Grid view">⊞</button>
+      <button class="view-btn" id="listBtn" onclick="setView('list')" title="List view">☰</button>
+    </div>
+  </div>
+</div>
+
+<!-- LISTINGS GRID -->
+<div class="container">
+  <div class="listings-grid" id="listingsGrid"></div>
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <div class="empty-icon">🏚</div>
+    <h3>No listings found</h3>
+    <p>Try adjusting your filters or <a href="#" onclick="clearFilters()">clear all filters</a></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">বাসা<span>বাড়ি</span></div>
+        <p>Smart rental finder for Bangladesh. No brokers, no hassle.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="listings.html">Browse Listings</a>
+        <a href="admin.html">Add Listing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Areas</h4>
+        <a href="#">Mirpur</a>
+        <a href="#">Uttara</a>
+        <a href="#">Dhanmondi</a>
+        <a href="#">Gulshan</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <span>info@bashabari.bd</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 BashaBari. Built for Bangladesh 🇧🇩</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // Parse URL params from hero search
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('loc')) document.getElementById('filterLocation').value = params.get('loc');
+    if (params.get('budget')) document.getElementById('filterBudget').value = params.get('budget');
+    if (params.get('type')) document.getElementById('filterType').value = params.get('type');
+    applyFilters();
+  });
+
+  let currentView = 'grid';
+
+  function setView(v) {
+    currentView = v;
+    const grid = document.getElementById('listingsGrid');
+    document.getElementById('gridBtn').classList.toggle('active', v === 'grid');
+    document.getElementById('listBtn').classList.toggle('active', v === 'list');
+    grid.className = v === 'list' ? 'listings-list' : 'listings-grid';
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const loc = document.getElementById('filterLocation').value;
+    const budget = document.getElementById('filterBudget').value;
+    const type = document.getElementById('filterType').value;
+    const verified = document.getElementById('filterVerified').value;
+    const sort = document.getElementById('filterSort').value;
+
+    let all = getAllListings();
+
+    if (loc) all = all.filter(l => l.location.includes(loc));
+    if (budget) all = all.filter(l => l.rent <= parseInt(budget));
+    if (type) all = all.filter(l => l.type === type);
+    if (verified === 'true') all = all.filter(l => l.verified);
+
+    if (sort === 'low') all.sort((a, b) => a.rent - b.rent);
+    if (sort === 'high') all.sort((a, b) => b.rent - a.rent);
+
+    const grid = document.getElementById('listingsGrid');
+    const empty = document.getElementById('emptyState');
+    const count = document.getElementById('resultsCount');
+
+    count.textContent = `${all.length} listing${all.length !== 1 ? 's' : ''} found`;
+
+    if (all.length === 0) {
+      grid.innerHTML = '';
+      empty.style.display = 'flex';
+    } else {
+      empty.style.display = 'none';
+      grid.innerHTML = all.map(l => renderCard(l, currentView === 'list')).join('');
+    }
+  }
+
+  function clearFilters() {
+    document.getElementById('filterLocation').value = '';
+    document.getElementById('filterBudget').value = '';
+    document.getElementById('filterType').value = '';
+    document.getElementById('filterVerified').value = '';
+    document.getElementById('filterSort').value = 'default';
+    applyFilters();
+  }
+</script>
+</body>
+</html>
