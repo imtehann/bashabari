@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Bashabari — Bangladesh's most trusted rental platform. Find verified homes in Dhaka."/>
+  <title>Bashabari — Find Your Perfect Home in Bangladesh</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='8' fill='%231e3a8a'/><path d='M10 22L20 11L30 22' stroke='%2360a5fa' stroke-width='2.5'/><rect x='14' y='22' width='12' height='10' rx='1.5' fill='%231e40af'/></svg>"/>
+</head>
+<body>
+
+<!-- Navbar root -->
+<div id="navbar-root"></div>
+
+<!-- ═══════════════════════════════════════════
+     HERO SECTION
+════════════════════════════════════════════ -->
+<section class="hero page-body">
+  <div class="hero-dots"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-badge animate-fade-up d0" id="hero-badge">
+        <span class="live-dot"></span>
+        <strong id="hero-badge-text">Trusted by 12,000+ renters across Dhaka</strong>
+      </div>
+
+      <h1 class="hero-title animate-fade-up d1">
+        <span id="hero-title1">Find Your Perfect</span><br/>
+        <span class="grad" id="hero-titleGrad">Home in Bangladesh</span>
+      </h1>
+
+      <p class="hero-sub animate-fade-up d2" id="hero-sub">
+        Skip the Facebook chaos. Browse verified listings, connect with trusted landlords,
+        and find your next home — safely and confidently.
+      </p>
+
+      <form class="hero-search animate-fade-up d3" onsubmit="handleHeroSearch(event)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" style="flex-shrink:0">
+          <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/>
+        </svg>
+        <input class="hero-search-input" id="hero-search-input" type="text"
+          placeholder="Search by area: Dhanmondi, Gulshan, Mirpur..."
+          autocomplete="off"/>
+        <button type="submit" class="hero-search-btn" id="hero-search-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/></svg>
+          <span id="hero-search-btn-text">Search Homes</span>
+        </button>
+      </form>
+
+      <div class="hero-stats animate-fade-up d4">
+        <div class="hero-stat-card">
+          <div class="hero-stat-num">12K+</div>
+          <div class="hero-stat-label" id="s1l">Happy Renters</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-num">3,200+</div>
+          <div class="hero-stat-label" id="s2l">Active Listings</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-num">840+</div>
+          <div class="hero-stat-label" id="s3l">Verified Landlords</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-num">32</div>
+          <div class="hero-stat-label" id="s4l">Areas Covered</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FEATURED LISTINGS
+════════════════════════════════════════════ -->
+<section class="section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span id="feat-chip">Featured Homes</span>
+      </div>
+      <h2 class="section-title font-display" id="feat-title">Featured Homes</h2>
+      <p class="section-sub" id="feat-sub">Hand-picked listings from verified landlords across Dhaka</p>
+    </div>
+
+    <!-- Filter chips -->
+    <div class="filter-bar" id="filter-bar" style="justify-content:center;margin-bottom:32px"></div>
+
+    <!-- Property grid -->
+    <div class="grid-3" id="prop-grid" style="margin-bottom:44px"></div>
+
+    <div style="text-align:center">
+      <a href="listings.html" class="btn btn-blue btn-lg" id="view-all-btn">
+        View All Listings
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS DARK SECTION
+════════════════════════════════════════════ -->
+<section class="stats-dark">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="section-header reveal">
+      <h2 class="section-title font-display section-title-light" id="stats-title">Bangladesh's Most Trusted Rental Platform</h2>
+      <p class="section-sub section-sub-light" id="stats-sub">Building a safer, smarter way to find a home in Bangladesh</p>
+    </div>
+    <div class="grid-4">
+      <div class="stat-box reveal reveal-delay-1">
+        <div class="stat-box-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="stat-box-num">12,000+</div>
+        <div class="stat-box-label" id="stat1-label">Happy Renters</div>
+      </div>
+      <div class="stat-box reveal reveal-delay-2">
+        <div class="stat-box-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <div class="stat-box-num">3,200+</div>
+        <div class="stat-box-label" id="stat2-label">Active Listings</div>
+      </div>
+      <div class="stat-box reveal reveal-delay-3">
+        <div class="stat-box-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="stat-box-num">840+</div>
+        <div class="stat-box-label" id="stat3-label">Verified Landlords</div>
+      </div>
+      <div class="stat-box reveal reveal-delay-1">
+        <div class="stat-box-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="stat-box-num">32</div>
+        <div class="stat-box-label" id="stat4-label">Areas Covered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════ -->
+<section class="section" style="background:white">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <span id="testi-chip">Real Stories. Real Renters.</span>
+      </div>
+      <h2 class="section-title font-display" id="testi-title">Real Stories. Real Renters.</h2>
+      <p class="section-sub" id="testi-sub">Don't take our word for it — hear from people who found their home on Bashabari.</p>
+    </div>
+    <div class="grid-3" id="testi-grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TRUST / WHY US
+════════════════════════════════════════════ -->
+<section class="section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span id="trust-chip">Why Renters Trust Bashabari</span>
+      </div>
+      <h2 class="section-title font-display" id="trust-title">Why Renters Trust Bashabari</h2>
+    </div>
+    <div class="grid-4" id="trust-grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA
+════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:1">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px;align-items:center">
+      <div class="reveal">
+        <h2 class="section-title font-display section-title-light" id="cta-title">Ready to Find Your Perfect Home?</h2>
+        <p class="section-sub section-sub-light mt-16" id="cta-sub">Join thousands of renters who found their home through Bashabari — not Facebook groups.</p>
+        <div class="mt-32">
+          <a href="listings.html" class="btn btn-white btn-lg" id="cta-btn">
+            Browse All Listings
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="cta-landlord reveal reveal-delay-2">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8" style="margin-bottom:18px"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <h3 class="section-title font-display section-title-light" style="font-size:clamp(20px,3vw,30px);margin-bottom:12px" id="cta-ll-title">Are You a Landlord?</h3>
+        <p class="section-sub section-sub-light" style="max-width:none;margin:0 0 28px" id="cta-ll-sub">List your property for free and reach thousands of verified, serious renters in minutes.</p>
+        <a href="signup.html" class="btn btn-blue btn-full btn-lg" id="cta-ll-btn">Post a Listing — It's Free</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer root -->
+<div id="footer-root"></div>
+
+<!-- Mobile bottom nav -->
+<div id="bottom-nav-root"></div>
+
+<!-- Toast container -->
+<div id="toast-container" class="toast-container"></div>
+
+<script src="js/app.js"></script>
+<script>
+  let activeFilter = 'all';
+
+  function handleHeroSearch(e) {
+    e.preventDefault();
+    const q = document.getElementById('hero-search-input').value.trim();
+    window.location.href = 'listings.html' + (q ? '?q=' + encodeURIComponent(q) : '');
+  }
+
+  function renderFilters() {
+    const filters = LANG[currentLang].filters;
+    const bar = document.getElementById('filter-bar');
+    if (!bar) return;
+    bar.innerHTML = Object.entries(filters).map(([k,v]) =>
+      `<button class="chip${activeFilter===k?' active':''}" onclick="setFilter('${k}')">${v}</button>`
+    ).join('');
+  }
+
+  function setFilter(f) {
+    activeFilter = f;
+    renderFilters();
+    renderCards();
+  }
+
+  function renderCards() {
+    const grid = document.getElementById('prop-grid');
+    if (!grid) return;
+    const saved = getSaved();
+    const filtered = activeFilter === 'all' ? PROPERTIES : PROPERTIES.filter(p => p.type === activeFilter);
+    grid.innerHTML = filtered.map(p => propCardHTML(p, saved)).join('');
+  }
+
+  function renderTestimonials() {
+    const grid = document.getElementById('testi-grid');
+    if (!grid) return;
+    const isBn = currentLang === 'bn';
+    grid.innerHTML = TESTIMONIALS.map((tm, i) => `
+      <div class="testi-card reveal reveal-delay-${i+1}">
+        <div class="testi-head">
+          <div class="avatar avatar-lg">${tm.avatar}</div>
+          <div>
+            <div class="testi-name${isBn?' font-bn':''}">${isBn?tm.nameBn:tm.name}</div>
+            <div class="testi-role${isBn?' font-bn':''}">${isBn?tm.roleBn:tm.role} · ${isBn?tm.locBn:tm.loc}</div>
+            <div style="margin-top:5px">${starsHTML(tm.rating)}</div>
+          </div>
+        </div>
+        <p class="testi-quote${isBn?' font-bn':''}">${isBn?tm.textBn:tm.text}</p>
+      </div>`).join('');
+  }
+
+  function renderTrust() {
+    const grid = document.getElementById('trust-grid');
+    if (!grid) return;
+    const tr = LANG[currentLang].trust;
+    const items = [
+      { icon:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>', color:'#dbeafe', iconColor:'#2563eb', title:tr.t1, desc:tr.d1 },
+      { icon:'<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>', color:'#d1fae5', iconColor:'#059669', title:tr.t2, desc:tr.d2 },
+      { icon:'<circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/>', color:'#fef3c7', iconColor:'#d97706', title:tr.t3, desc:tr.d3 },
+      { icon:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>', color:'#fce7f3', iconColor:'#db2777', title:tr.t4, desc:tr.d4 }
+    ];
+    grid.innerHTML = items.map((item, i) => `
+      <div class="trust-card reveal reveal-delay-${i+1}">
+        <div class="trust-icon" style="background:${item.color}">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${item.iconColor}" stroke-width="1.8">${item.icon}</svg>
+        </div>
+        <h3 class="${currentLang==='bn'?'font-bn':''}">${item.title}</h3>
+        <p class="${currentLang==='bn'?'font-bn':''}">${item.desc}</p>
+      </div>`).join('');
+  }
+
+  function applyTranslations() {
+    const isBn = currentLang === 'bn';
+    const h = LANG[currentLang].hero;
+    const tl = LANG[currentLang].listings;
+    const ct = LANG[currentLang].cta;
+
+    document.getElementById('hero-badge-text').textContent = h.badge;
+    document.getElementById('hero-title1').textContent = h.title1;
+    document.getElementById('hero-titleGrad').textContent = h.titleGrad;
+    document.getElementById('hero-sub').textContent = h.sub;
+    document.getElementById('hero-search-input').placeholder = h.ph;
+    document.getElementById('hero-search-btn-text').textContent = h.btn;
+
+    if (isBn) {
+      document.getElementById('s1l').textContent = 'সুখী ভাড়াটে';
+      document.getElementById('s2l').textContent = 'সক্রিয় লিস্টিং';
+      document.getElementById('s3l').textContent = 'যাচাইকৃত বাড়িওয়ালা';
+      document.getElementById('s4l').textContent = 'এলাকা কভার';
+      document.getElementById('hero-title1').classList.add('font-bn');
+      document.getElementById('hero-titleGrad').classList.add('font-bn');
+      document.getElementById('hero-sub').classList.add('font-bn');
+    }
+
+    document.getElementById('feat-chip').textContent = tl.title;
+    document.getElementById('feat-title').textContent = tl.title;
+    document.getElementById('feat-sub').textContent = tl.sub;
+    document.getElementById('view-all-btn').childNodes[0].textContent = ' '+tl.viewAll+' ';
+
+    const st = LANG[currentLang].stats;
+    document.getElementById('stats-title').textContent = st.title;
+    document.getElementById('stats-sub').textContent = st.sub;
+    if (isBn) {
+      document.getElementById('stat1-label').textContent = 'সুখী ভাড়াটে';
+      document.getElementById('stat2-label').textContent = 'সক্রিয় লিস্টিং';
+      document.getElementById('stat3-label').textContent = 'যাচাইকৃত বাড়িওয়ালা';
+      document.getElementById('stat4-label').textContent = 'এলাকা কভার';
+    }
+
+    document.getElementById('cta-title').textContent = ct.title;
+    document.getElementById('cta-sub').textContent = ct.sub;
+    document.getElementById('cta-btn').childNodes[0].textContent = ct.btn;
+    document.getElementById('cta-ll-title').textContent = ct.landlordTitle;
+    document.getElementById('cta-ll-sub').textContent = ct.landlordSub;
+    document.getElementById('cta-ll-btn').textContent = ct.landlordBtn;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initPage('home');
+    applyTranslations();
+    renderFilters();
+    renderCards();
+    renderTestimonials();
+    renderTrust();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find a Home — Bashabari</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='8' fill='%231e3a8a'/><path d='M10 22L20 11L30 22' stroke='%2360a5fa' stroke-width='2.5'/><rect x='14' y='22' width='12' height='10' rx='1.5' fill='%231e40af'/></svg>"/>
+  <style>
+    .price-slider { accent-color: #2563eb; width: 220px; cursor: pointer; }
+    .sort-select {
+      padding: 9px 14px; border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-md); font-size: 13.5px;
+      color: var(--gray-700); background: white; cursor: pointer;
+      outline: none; font-family: var(--font-body);
+    }
+    .sort-select:focus { border-color: var(--blue-mid); }
+    .filter-toggle-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 16px; border-radius: var(--radius-md);
+      border: 1.5px solid var(--gray-200); background: white;
+      font-size: 13.5px; font-weight: 500; color: var(--gray-700);
+      cursor: pointer; transition: all var(--transition);
+    }
+    .filter-toggle-btn:hover { border-color: var(--blue-mid); color: var(--blue); }
+    .filter-toggle-btn.open { background: var(--navy-light); border-color: var(--navy-light); color: white; }
+  </style>
+</head>
+<body>
+<div id="navbar-root"></div>
+
+<!-- Page Header -->
+<div class="page-header page-body">
+  <div class="container">
+    <div class="hero-badge" style="display:inline-flex;margin-bottom:16px">
+      <span class="live-dot"></span>
+      <span id="hdr-badge">3,200+ active listings across Dhaka</span>
+    </div>
+    <h1 class="font-display" id="page-title">Find Your Next Home</h1>
+    <p id="page-sub">Browse verified rentals across all areas of Dhaka</p>
+  </div>
+</div>
+
+<!-- Search & Filter bar -->
+<div class="search-bar-page" style="position:sticky;top:var(--nav-h);z-index:90">
+  <div class="container">
+    <div class="search-bar-inner">
+      <div class="search-input-wrap" style="flex:1">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" style="flex-shrink:0">
+          <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/>
+        </svg>
+        <input class="search-input-field" id="search-field" type="text"
+          placeholder="Search by area, name..." autocomplete="off" oninput="doSearch()"/>
+        <button onclick="clearSearch()" id="clear-btn" style="display:none;color:var(--gray-400);padding:2px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <button class="filter-toggle-btn" id="filter-toggle" onclick="toggleFilters()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
+        </svg>
+        <span id="filter-btn-text">Filters</span>
+      </button>
+      <select class="sort-select" id="sort-select" onchange="doSearch()">
+        <option value="default">Sort: Recommended</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating">Highest Rated</option>
+      </select>
+    </div>
+
+    <!-- Expandable filter panel -->
+    <div class="filter-panel" id="filter-panel">
+      <div class="filter-panel-row">
+        <div class="filter-group">
+          <div class="filter-group-label" id="fg-type">Property Type</div>
+          <div class="filter-chips" id="type-chips"></div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-group-label" id="fg-price">Max Price: <strong id="price-display">৳ 100,000</strong></div>
+          <input type="range" class="price-slider" min="5000" max="100000" step="1000"
+            value="100000" id="price-range" oninput="updatePrice(this.value)"/>
+        </div>
+        <div class="filter-group">
+          <div class="filter-group-label" id="fg-beds">Min Bedrooms</div>
+          <div class="filter-chips" id="beds-chips">
+            <button class="chip active" onclick="setBeds(0,this)">Any</button>
+            <button class="chip" onclick="setBeds(1,this)">1+</button>
+            <button class="chip" onclick="setBeds(2,this)">2+</button>
+            <button class="chip" onclick="setBeds(3,this)">3+</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-group-label" id="fg-verified">Verified Only</div>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px">
+            <input type="checkbox" id="verified-toggle" onchange="doSearch()" style="accent-color:#2563eb;width:16px;height:16px"/>
+            <span id="verified-label">Show verified landlords only</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick filter chips -->
+    <div class="filter-bar" id="quick-chips"></div>
+  </div>
+</div>
+
+<!-- Results -->
+<div style="background:var(--gray-50);padding:32px 0 80px;min-height:60vh">
+  <div class="container">
+    <div class="results-header">
+      <span class="results-count" id="results-count"><strong>6</strong> homes found</span>
+    </div>
+    <div class="grid-3" id="results-grid"></div>
+    <!-- Empty state -->
+    <div class="empty-state" id="empty-state" style="display:none">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/>
+      </svg>
+      <h3 id="empty-title">No homes found</h3>
+      <p id="empty-sub">Try adjusting your filters or search term</p>
+      <button class="btn btn-outline mt-24" onclick="resetAll()">Reset Filters</button>
+    </div>
+  </div>
+</div>
+
+<div id="footer-root"></div>
+<div id="bottom-nav-root"></div>
+<div id="toast-container" class="toast-container"></div>
+
+<script src="js/app.js"></script>
+<script>
+  let filterType = 'all';
+  let filterMaxPrice = 100000;
+  let filterMinBeds = 0;
+  let filterVerified = false;
+
+  function getURLParam(k) {
+    return new URLSearchParams(window.location.search).get(k) || '';
+  }
+
+  function toggleFilters() {
+    const panel = document.getElementById('filter-panel');
+    const btn = document.getElementById('filter-toggle');
+    panel.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
+  function updatePrice(v) {
+    filterMaxPrice = Number(v);
+    document.getElementById('price-display').textContent = '৳ ' + Number(v).toLocaleString('en-BD');
+    doSearch();
+  }
+
+  function setBeds(n, el) {
+    filterMinBeds = n;
+    document.querySelectorAll('#beds-chips .chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    doSearch();
+  }
+
+  function clearSearch() {
+    document.getElementById('search-field').value = '';
+    document.getElementById('clear-btn').style.display = 'none';
+    doSearch();
+  }
+
+  function doSearch() {
+    const q = document.getElementById('search-field')?.value?.trim().toLowerCase() || '';
+    document.getElementById('clear-btn').style.display = q ? 'block' : 'none';
+    const sort = document.getElementById('sort-select')?.value || 'default';
+    filterVerified = document.getElementById('verified-toggle')?.checked || false;
+
+    let results = PROPERTIES.filter(p => {
+      const matchQ = !q || p.area.toLowerCase().includes(q) || p.title.toLowerCase().includes(q) || p.titleBn.includes(q);
+      const matchT = filterType === 'all' || p.type === filterType;
+      const matchP = p.price <= filterMaxPrice;
+      const matchB = filterMinBeds === 0 || p.beds >= filterMinBeds;
+      const matchV = !filterVerified || p.verified;
+      return matchQ && matchT && matchP && matchB && matchV;
+    });
+
+    if (sort === 'price-asc') results.sort((a,b) => a.price - b.price);
+    else if (sort === 'price-desc') results.sort((a,b) => b.price - a.price);
+    else if (sort === 'rating') results.sort((a,b) => b.rating - a.rating);
+
+    renderResults(results);
+  }
+
+  function resetAll() {
+    filterType = 'all';
+    filterMaxPrice = 100000;
+    filterMinBeds = 0;
+    filterVerified = false;
+    document.getElementById('search-field').value = '';
+    document.getElementById('price-range').value = 100000;
+    document.getElementById('price-display').textContent = '৳ 100,000';
+    document.getElementById('verified-toggle').checked = false;
+    document.querySelectorAll('#beds-chips .chip').forEach((c,i) => c.classList.toggle('active', i===0));
+    renderTypChips();
+    doSearch();
+  }
+
+  function setType(t) {
+    filterType = t;
+    renderTypChips();
+    doSearch();
+  }
+
+  function renderTypChips() {
+    const filters = LANG[currentLang].filters;
+    ['filter-bar','quick-chips'].forEach(id => {
+      const bar = document.getElementById(id);
+      if (!bar) return;
+      bar.innerHTML = Object.entries(filters).map(([k,v]) =>
+        `<button class="chip${filterType===k?' active':''}" onclick="setType('${k}')">${v}</button>`
+      ).join('');
+    });
+    const typeChips = document.getElementById('type-chips');
+    if (!typeChips) return;
+    typeChips.innerHTML = Object.entries(filters).map(([k,v]) =>
+      `<button class="chip${filterType===k?' active':''}" onclick="setType('${k}')">${v}</button>`
+    ).join('');
+  }
+
+  function renderResults(results) {
+    const grid = document.getElementById('results-grid');
+    const empty = document.getElementById('empty-state');
+    const count = document.getElementById('results-count');
+    const tl = LANG[currentLang].listings;
+    count.innerHTML = `<strong>${results.length}</strong> ${tl.results}`;
+    if (results.length === 0) {
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+    } else {
+      empty.style.display = 'none';
+      const saved = getSaved();
+      grid.innerHTML = results.map(p => propCardHTML(p, saved)).join('');
+    }
+  }
+
+  function applyTranslations() {
+    const isBn = currentLang === 'bn';
+    if (isBn) {
+      document.getElementById('page-title').textContent = 'আপনার পরবর্তী বাড়ি খুঁজুন';
+      document.getElementById('page-sub').textContent = 'ঢাকার সব এলাকায় যাচাইকৃত ভাড়া বাড়ি ব্রাউজ করুন';
+      document.getElementById('hdr-badge').textContent = 'ঢাকা জুড়ে ৩,২০০+ সক্রিয় লিস্টিং';
+      document.getElementById('filter-btn-text').textContent = 'ফিল্টার';
+      document.getElementById('fg-type').textContent = 'সম্পত্তির ধরন';
+      document.getElementById('fg-price').textContent = 'সর্বোচ্চ মূল্য:';
+      document.getElementById('fg-beds').textContent = 'সর্বনিম্ন বেডরুম';
+      document.getElementById('fg-verified').textContent = 'শুধু যাচাইকৃত';
+      document.getElementById('verified-label').textContent = 'শুধু যাচাইকৃত বাড়িওয়ালা দেখান';
+      document.getElementById('empty-title').textContent = 'কোনো বাড়ি পাওয়া যায়নি';
+      document.getElementById('empty-sub').textContent = 'ফিল্টার বা অনুসন্ধান পরিবর্তন করে দেখুন';
+      document.getElementById('page-title').classList.add('font-bn');
+      document.getElementById('page-sub').classList.add('font-bn');
+      const sortEl = document.getElementById('sort-select');
+      sortEl.options[0].text = 'সাজান: প্রস্তাবিত';
+      sortEl.options[1].text = 'দাম: কম থেকে বেশি';
+      sortEl.options[2].text = 'দাম: বেশি থেকে কম';
+      sortEl.options[3].text = 'সর্বোচ্চ রেটিং';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initPage('listings');
+    applyTranslations();
+    renderTypChips();
+    const q = getURLParam('q');
+    if (q) {
+      document.getElementById('search-field').value = q;
+      document.getElementById('clear-btn').style.display = 'block';
+    }
+    doSearch();
+  });
+</script>
+</body>
+</html>
