@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saved Homes — BashabBari</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="breadcrumb"><a href="index.html">Home</a> / <a href="dashboard.html">Dashboard</a> / Saved Homes</div>
+      <h1>Saved Homes</h1>
+      <p><span id="savedCount">0</span> properties saved to your list</p>
+    </div>
+  </div>
+
+  <main>
+    <div style="max-width:var(--max-w);margin:0 auto;padding:40px 24px;">
+      <div class="listings-grid" id="savedGrid"></div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

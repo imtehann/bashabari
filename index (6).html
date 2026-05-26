@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BashabBari — Find Your Home in Bangladesh</title>
+  <meta name="description" content="Bangladesh's #1 broker-free rental platform. Find apartments, houses, and studios in Dhaka with no broker fees." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <main>
+    <!-- ── Hero ───────────────────────────────────── -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-label">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          No brokers. No hidden fees.
+        </div>
+        <h1>Find Your Perfect<br/><em>Home in Bangladesh</em></h1>
+        <p>Browse hundreds of verified rental listings across Dhaka. Connect directly with landlords — zero broker commission.</p>
+
+        <form class="hero-search-bar" id="heroSearchForm">
+          <input type="text" id="heroSearchInput" placeholder="Search by area, type or keyword…" autocomplete="off" />
+          <div class="divider"></div>
+          <select id="heroLocationSelect">
+            <option value="">All Locations</option>
+            <option value="Dhanmondi">Dhanmondi</option>
+            <option value="Mirpur">Mirpur</option>
+            <option value="Gulshan">Gulshan</option>
+            <option value="Uttara">Uttara</option>
+            <option value="Bashundhara">Bashundhara</option>
+            <option value="Mohammadpur">Mohammadpur</option>
+            <option value="Banani">Banani</option>
+            <option value="Motijheel">Motijheel</option>
+            <option value="Adabor">Adabor</option>
+            <option value="Shyamoli">Shyamoli</option>
+            <option value="Wari">Wari</option>
+          </select>
+          <button type="submit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            Search
+          </button>
+        </form>
+
+        <div class="hero-trust">
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span id="trustTotal">12+</span> listings available
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Verified landlords
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            0% broker fee
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Browse by Location ─────────────────────── -->
+    <section class="section" style="background:#fff;">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Browse by Area</span>
+          <h2>Popular Locations in Dhaka</h2>
+          <p>Find homes in the areas that matter most to you</p>
+        </div>
+        <div class="location-grid" id="locationGrid"></div>
+      </div>
+    </section>
+
+    <!-- ── Featured Listings ──────────────────────── -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header" style="text-align:left; margin-bottom:32px;">
+          <span class="section-label">Hand-Picked</span>
+          <h2>Featured Listings</h2>
+          <p style="margin-top:6px;">Premium verified properties picked by our team</p>
+        </div>
+        <div class="listings-grid" id="featuredGrid"></div>
+        <div style="text-align:center; margin-top:40px;">
+          <a href="listings.html" class="btn-secondary">View All Listings →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── How It Works ───────────────────────────── -->
+    <section class="section" style="background:#fff;">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Simple Process</span>
+          <h2>Find Your Home in 3 Steps</h2>
+          <p>No agents. No middlemen. Just you and your future home.</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h3>Search & Filter</h3>
+            <p>Browse listings by location, price, type, and room count. Use verified filters to find trusted properties.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h3>View Details</h3>
+            <p>See photos, amenities, deposit info, and full property specs. Save favourites to your dashboard.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h3>Contact Directly</h3>
+            <p>Call or WhatsApp the landlord directly. No broker, no commission — move in faster and cheaper.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Stats Strip ────────────────────────────── -->
+    <section style="background: linear-gradient(135deg,#1A56DB,#1240A8); padding:56px 0; color:#fff;">
+      <div class="section-inner">
+        <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:32px;">
+          <div style="text-align:center;">
+            <div style="font-size:2.4rem;font-weight:800;" id="statsTotal">12+</div>
+            <div style="opacity:.7;margin-top:6px;font-size:.9rem;">Active Listings</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:2.4rem;font-weight:800;" id="statsVerified">8+</div>
+            <div style="opacity:.7;margin-top:6px;font-size:.9rem;">Verified Properties</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:2.4rem;font-weight:800;">11</div>
+            <div style="opacity:.7;margin-top:6px;font-size:.9rem;">Areas Covered</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:2.4rem;font-weight:800;">0%</div>
+            <div style="opacity:.7;margin-top:6px;font-size:.9rem;">Broker Commission</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ────────────────────────────────────── -->
+    <div class="cta-strip">
+      <div class="section-inner">
+        <h2>Have a Property to Rent?</h2>
+        <p>List it for free on BashabBari and reach thousands of tenants directly.</p>
+        <div class="cta-btns">
+          <a href="signup.html" class="btn-white">List a Property</a>
+          <a href="listings.html" class="btn-outline-white">Browse Listings</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const all = ListingsStore.getAll();
+
+      // Update trust count
+      document.getElementById('trustTotal').textContent = all.length + '+';
+      document.getElementById('statsTotal').textContent = all.length + '+';
+      document.getElementById('statsVerified').textContent = all.filter(l => l.verified).length + '+';
+
+      // Hero search
+      document.getElementById('heroSearchForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const q = document.getElementById('heroSearchInput').value.trim();
+        const loc = document.getElementById('heroLocationSelect').value;
+        const params = new URLSearchParams();
+        if (q) params.set('q', q);
+        if (loc) params.set('location', loc);
+        window.location.href = 'listings.html?' + params.toString();
+      });
+
+      // Location grid
+      const locationData = [
+        { name: 'Dhanmondi', emoji: '🏙️' },
+        { name: 'Gulshan', emoji: '💎' },
+        { name: 'Banani', emoji: '🌿' },
+        { name: 'Mirpur', emoji: '🏘️' },
+        { name: 'Uttara', emoji: '✈️' },
+        { name: 'Bashundhara', emoji: '🌳' },
+        { name: 'Mohammadpur', emoji: '🕌' },
+        { name: 'Motijheel', emoji: '🏢' },
+        { name: 'Adabor', emoji: '🏡' },
+        { name: 'Shyamoli', emoji: '🌸' },
+        { name: 'Wari', emoji: '🏛️' },
+      ];
+      const grid = document.getElementById('locationGrid');
+      if (grid) {
+        grid.innerHTML = locationData.map(l => {
+          const count = all.filter(x => x.location === l.name).length;
+          return `
+            <a href="listings.html?location=${encodeURIComponent(l.name)}" class="location-card">
+              <div class="location-emoji">${l.emoji}</div>
+              <div class="location-name">${l.name}</div>
+              <div class="location-count">${count} listing${count !== 1 ? 's' : ''}</div>
+            </a>
+          `;
+        }).join('');
+      }
+
+      // Featured listings
+      const featGrid = document.getElementById('featuredGrid');
+      if (featGrid) {
+        const featured = all.filter(l => l.featured).slice(0, 6);
+        featGrid.innerHTML = featured.map(l => renderListingCard(l)).join('');
+      }
+    });
+  </script>
+</body>
+</html>

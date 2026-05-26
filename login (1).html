@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — BashabBari</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="auth-wrap">
+    <!-- Visual Panel -->
+    <div class="auth-visual">
+      <a href="index.html" class="nav-logo" style="color:#fff; margin-bottom:40px;">
+        <span class="logo-icon">🏠</span>
+        <span>Basha<strong style="color:#93C5FD;">Bari</strong></span>
+      </a>
+      <h2>Welcome back to BashabBari</h2>
+      <p>Bangladesh's trusted broker-free rental platform. Find your perfect home without the hassle.</p>
+      <div class="auth-visual-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <div style="margin-top:48px; display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);padding:16px;border-radius:12px;">
+          <span style="font-size:1.4rem;">🔍</span>
+          <div>
+            <div style="font-weight:700;font-size:.95rem;">Browse Verified Listings</div>
+            <div style="opacity:.7;font-size:.82rem;">Hundreds of trusted properties in Dhaka</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);padding:16px;border-radius:12px;">
+          <span style="font-size:1.4rem;">❤️</span>
+          <div>
+            <div style="font-weight:700;font-size:.95rem;">Save Your Favourites</div>
+            <div style="opacity:.7;font-size:.82rem;">Keep track of homes you love</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);padding:16px;border-radius:12px;">
+          <span style="font-size:1.4rem;">📞</span>
+          <div>
+            <div style="font-weight:700;font-size:.95rem;">Direct Contact</div>
+            <div style="opacity:.7;font-size:.82rem;">Call landlords directly — no middleman</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Panel -->
+    <div class="auth-form-wrap">
+      <div class="auth-form-inner">
+        <div class="auth-logo">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon">🏠</span>
+            <span>Basha<strong>Bari</strong></span>
+          </a>
+        </div>
+        <h1 class="auth-title">Sign in to your account</h1>
+        <p class="auth-sub">Welcome back! Enter your details below.</p>
+
+        <!-- Demo credentials hint -->
+        <div style="background:var(--primary-light);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:24px;font-size:.82rem;color:var(--primary);">
+          <strong>Demo accounts:</strong><br/>
+          User: arif@example.com / demo123<br/>
+          Admin: admin@bashabari.bd / admin123
+        </div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email address</label>
+            <div class="input-wrap">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,12 2,6"></polyline></svg>
+              <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="input-wrap">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <input type="password" id="loginPassword" class="form-control" placeholder="Your password" autocomplete="current-password" required />
+              <button type="button" class="toggle-password" data-target="loginPassword">
+                <span class="eye-icon">👁</span>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:13px;">
+            Sign In
+          </button>
+        </form>
+
+        <p class="auth-alt">Don't have an account? <a href="signup.html">Create one free</a></p>
+        <p style="text-align:center;margin-top:12px;"><a href="index.html" style="font-size:.85rem;color:var(--text-muted);">← Back to home</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

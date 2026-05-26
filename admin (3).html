@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — BashabBari</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .admin-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .add-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .form-section-title {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-muted);
+      margin: 24px 0 12px;
+      grid-column: 1 / -1;
+    }
+    .admin-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+    }
+    .admin-header h1 { font-size: 1.5rem; font-weight: 800; }
+    .admin-search-wrap {
+      display: flex; align-items: center; gap: 10px;
+    }
+    #adminSearch {
+      padding: 9px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: .875rem;
+      width: 260px;
+      transition: border .2s;
+    }
+    #adminSearch:focus { border-color: var(--primary); outline: none; }
+    .table-wrap { overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Admin</div>
+      <h1>Admin Panel</h1>
+      <p>Manage all listings, verify properties, and add new entries</p>
+    </div>
+  </div>
+
+  <main>
+    <div class="admin-wrap">
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:32px;">
+        <div class="stat-card">
+          <div class="stat-number" id="adminStatTotal">0</div>
+          <div class="stat-label">Total Listings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="adminStatVerified">0</div>
+          <div class="stat-label">Verified</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="adminStatFeatured">0</div>
+          <div class="stat-label">Featured</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="adminStatViews">0</div>
+          <div class="stat-label">Total Views</div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="listings">All Listings</button>
+        <button class="admin-tab" data-tab="add">Add Listing</button>
+      </div>
+
+      <!-- ── LISTINGS TAB ──────────────────────── -->
+      <div class="admin-section active" id="section-listings">
+        <div class="admin-header">
+          <h1>All Listings</h1>
+          <div class="admin-search-wrap">
+            <input type="text" id="adminSearch" placeholder="Search by title or location…" />
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title / Area</th>
+                <th>Location</th>
+                <th>Rent</th>
+                <th>Verified</th>
+                <th>Featured</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminTable">
+              <tr><td colspan="7" class="empty-row">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── ADD LISTING TAB ────────────────────── -->
+      <div class="admin-section" id="section-add">
+        <div style="margin-bottom:24px;">
+          <h2 style="font-size:1.1rem;font-weight:800;">Add a New Listing</h2>
+          <p style="color:var(--text-muted);font-size:.875rem;margin-top:4px;">Fill in the details below to add a new property listing.</p>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;">
+          <form id="addListingForm">
+            <div class="add-form-grid">
+              <div class="form-section-title">Property Information</div>
+
+              <div class="form-group">
+                <label for="addTitle">Title *</label>
+                <input type="text" name="title" id="addTitle" class="form-control" placeholder="e.g. Modern 3-Bedroom Flat in Dhanmondi" required />
+              </div>
+
+              <div class="form-group">
+                <label for="addLocation">Location (Area) *</label>
+                <select name="location" id="addLocation" class="form-control" required>
+                  <option value="">Select location</option>
+                  <option>Dhanmondi</option>
+                  <option>Mirpur</option>
+                  <option>Gulshan</option>
+                  <option>Uttara</option>
+                  <option>Bashundhara</option>
+                  <option>Mohammadpur</option>
+                  <option>Banani</option>
+                  <option>Motijheel</option>
+                  <option>Adabor</option>
+                  <option>Shyamoli</option>
+                  <option>Wari</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="addArea">Full Address</label>
+                <input type="text" name="area" id="addArea" class="form-control" placeholder="e.g. Road 27, Dhanmondi, Dhaka 1209" />
+              </div>
+
+              <div class="form-group">
+                <label for="addType">Type *</label>
+                <select name="type" id="addType" class="form-control" required>
+                  <option value="">Select type</option>
+                  <option>Apartment</option>
+                  <option>House</option>
+                  <option>Studio</option>
+                  <option>Duplex</option>
+                  <option>Sublet</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="addRooms">Bedrooms *</label>
+                <input type="number" name="rooms" id="addRooms" class="form-control" min="1" max="10" placeholder="3" required />
+              </div>
+
+              <div class="form-group">
+                <label for="addBathrooms">Bathrooms</label>
+                <input type="number" name="bathrooms" id="addBathrooms" class="form-control" min="1" max="10" placeholder="2" />
+              </div>
+
+              <div class="form-group">
+                <label for="addSize">Size (sq ft)</label>
+                <input type="number" name="size" id="addSize" class="form-control" placeholder="1200" />
+              </div>
+
+              <div class="form-section-title">Pricing</div>
+
+              <div class="form-group">
+                <label for="addRent">Monthly Rent (৳) *</label>
+                <input type="number" name="rent" id="addRent" class="form-control" placeholder="25000" required />
+              </div>
+
+              <div class="form-group">
+                <label for="addDeposit">Security Deposit (৳)</label>
+                <input type="number" name="deposit" id="addDeposit" class="form-control" placeholder="Leave blank for 2× rent" />
+              </div>
+
+              <div class="form-section-title">Contact</div>
+
+              <div class="form-group">
+                <label for="addContactName">Contact Name *</label>
+                <input type="text" name="contactName" id="addContactName" class="form-control" placeholder="Landlord or agent name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="addContactPhone">Phone / WhatsApp *</label>
+                <input type="tel" name="contactPhone" id="addContactPhone" class="form-control" placeholder="01XXXXXXXXX" required />
+              </div>
+
+              <div class="form-section-title">Details</div>
+
+              <div class="form-group" style="grid-column:1/-1;">
+                <label for="addDescription">Description *</label>
+                <textarea name="description" id="addDescription" class="form-control" rows="4" placeholder="Describe the property in detail…" required style="resize:vertical;"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="addAmenities">Amenities (comma-separated)</label>
+                <input type="text" name="amenities" id="addAmenities" class="form-control" placeholder="Lift, Generator, Gas Line, Parking" />
+              </div>
+
+              <div class="form-group">
+                <label for="addImage">Image URL</label>
+                <input type="url" name="image" id="addImage" class="form-control" placeholder="https://…" />
+              </div>
+            </div>
+
+            <div style="margin-top:28px;">
+              <button type="submit" class="btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Add Listing
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── Edit Modal ────────────────────────────── -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit Listing</h3>
+        <button class="modal-close" onclick="closeEditModal()">✕</button>
+      </div>
+      <form id="editForm">
+        <input type="hidden" id="editId" />
+        <div class="form-group">
+          <label for="editTitle">Title</label>
+          <input type="text" id="editTitle" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="editRent">Monthly Rent (৳)</label>
+          <input type="number" id="editRent" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="editLocation">Location</label>
+          <select id="editLocation" class="form-control">
+            <option>Dhanmondi</option><option>Mirpur</option><option>Gulshan</option>
+            <option>Uttara</option><option>Bashundhara</option><option>Mohammadpur</option>
+            <option>Banani</option><option>Motijheel</option><option>Adabor</option>
+            <option>Shyamoli</option><option>Wari</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editType">Type</label>
+          <select id="editType" class="form-control">
+            <option>Apartment</option><option>House</option><option>Studio</option>
+            <option>Duplex</option><option>Sublet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editRooms">Bedrooms</label>
+          <input type="number" id="editRooms" class="form-control" min="1" />
+        </div>
+        <div class="form-group">
+          <label for="editPhone">Contact Phone</label>
+          <input type="tel" id="editPhone" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="editDesc">Description</label>
+          <textarea id="editDesc" class="form-control" rows="4" style="resize:vertical;"></textarea>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <button type="submit" class="btn-primary" style="flex:1;justify-content:center;">Save Changes</button>
+          <button type="button" class="btn-secondary" onclick="closeEditModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

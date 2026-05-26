@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Property Detail — BashabBari</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <main id="propertyContent">
+    <div style="max-width:var(--max-w);margin:0 auto;padding:20px 24px 8px;">
+      <div class="breadcrumb" id="propBreadcrumb">
+        <a href="index.html">Home</a> / <a href="listings.html">Listings</a> / Loading…
+      </div>
+    </div>
+
+    <div class="property-layout">
+      <!-- Left Column -->
+      <div>
+        <!-- Gallery -->
+        <div class="gallery-main">
+          <img id="galleryMain" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&q=80" alt="Property" />
+          <div class="gallery-count" id="galleryCount">1 / 1</div>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+
+        <!-- Details -->
+        <div id="propDetails" style="margin-top:24px;"></div>
+      </div>
+
+      <!-- Right Column: Contact Card -->
+      <div>
+        <div class="contact-card" id="contactCard">
+          <div style="text-align:center;padding:40px 0;color:var(--text-muted);">
+            <div class="spinner" style="margin:0 auto;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Similar Listings -->
+    <section id="similarSection" class="section" style="background:#fff; margin-top:0;">
+      <div class="section-inner">
+        <div style="margin-bottom:28px;">
+          <span class="section-label">You may also like</span>
+          <h2 style="margin-top:10px;">Similar Properties</h2>
+        </div>
+        <div class="listings-grid" id="similarGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script src="property.js"></script>
+</body>
+</html>
